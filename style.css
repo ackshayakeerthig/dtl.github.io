@@ -1,6 +1,9 @@
 body {
-    font-family: 'Arial', sans-serif;
-    background-color: #FFE4E1; /* Light pink background */
+    font-family: 'Comic Sans MS', cursive, sans-serif; /* Using Comic Sans MS */
+    background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSc_Z6b_mO_nzjjWKB7K7OekxTti9WCpb-9Ww&s');
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-position: center; /* Centers the background image */
+    background-attachment: fixed; /* Keeps the background image fixed while scrolling */
     color: #333;
     margin: 0;
     padding: 20px;
@@ -8,9 +11,10 @@ body {
 }
 
 header {
-    background-color: #FF69B4; /* Vibrant pink */
+    background-color: rgba(255, 105, 180, 0.8); /* Light pink background with transparency */
     color: white;
     padding: 20px;
+    border-radius: 10px;
 }
 
 h1 {
@@ -19,29 +23,34 @@ h1 {
 }
 
 main {
+    max-width: 1200px; /* Adjust this value as needed */
+    margin: 0 auto; /* Centers the container */
     padding: 20px;
-}
-
-.image-container img {
-    max-width: 80%;
-    height: auto;
+    background-color: rgba(255, 255, 255, 0.8); /* White background with transparency for readability */
     border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    margin-bottom: 20px;
+    display: inline-block;
+    margin-top: 20px;
+    position: relative; /* Relative positioning for absolute child elements */
 }
 
 nav {
+    position: absolute; /* Positioning the nav absolutely */
+    top: 10px; /* Distance from the top */
+    right: 20px; /* Distance from the right */
     display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-top: 20px;
+    gap: 10px; /* Spacing between buttons */
+}
+
+nav a {
+    text-decoration: none; /* Removes underline from links */
 }
 
 button {
-    background-color: #FF69B4; /* Matching vibrant pink */
-    color: white;
-    padding: 15px 30px;
-    font-size: 1em;
+    background-color: #f7a9d0; /* Vibrant pink */
+    font-family: cursive;
+    color: rgb(1, 3, 5);
+    padding: 15px 20px; /* Adjusted padding for buttons */
+    font-size: 1.25em;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -49,7 +58,7 @@ button {
 }
 
 button:hover {
-    background-color: #FF1493; /* Darker pink on hover */
+    background-color: #967185; /* Darker pink on hover */
 }
 
 footer {
@@ -57,4 +66,13 @@ footer {
     padding: 10px;
     background-color: #333;
     color: white;
+    border-radius: 10px;
+}
+
+/* Responsive image styles */
+#responsive-image {
+    max-width: 100%; /* Makes the image responsive */
+    height: auto; /* Maintains the aspect ratio */
+    border-radius: 10px; /* Optional: adds rounded corners */
+    margin-bottom: 20px; /* Adds space below the image */
 }
