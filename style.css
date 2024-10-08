@@ -1,1 +1,60 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #FFE4E1; /* Light pink background */
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    text-align: center;
+}
 
+header {
+    background-color: #FF69B4; /* Vibrant pink */
+    color: white;
+    padding: 20px;
+}
+
+h1 {
+    margin: 0;
+    font-size: 2.5em;
+}
+
+main {
+    padding: 20px;
+}
+
+.image-container img {
+    max-width: 80%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+button {
+    background-color: #FF69B4; /* Matching vibrant pink */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #FF1493; /* Darker pink on hover */
+}
+
+footer {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}
