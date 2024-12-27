@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <!-- Add your CSS link here (Bootstrap or custom styles) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+
+    <div class="container mt-5">
+        <h1 class="mb-4">Search Results</h1>
+
+        {% if results %}
+            <div class="list-group">
+                {% for donor in results %}
+                    <div class="list-group-item">
+                        <h5>{{ donor.name }}</h5>
+                        <p><strong>Clothes Type:</strong> {{ donor.clothes }}</p>
+                        <p><strong>Location:</strong><a href="{{ donor.location }}" target="_blank" class="text-decoration-none" style="color: #007bff;">Click me</a>
+                        <p><strong>Description:</strong> {{ donor.description }}</p>
+                        <!-- Add any other donor attributes here -->
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No results found for the selected search criteria.</p>
+        {% endif %}
+    </div>
+
+    <!-- Add your JS here if necessary -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

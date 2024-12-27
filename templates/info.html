@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Donor Information</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <h1>Donor Information</h1>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            <div class="alerts">
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    {% endwith %}
+
+    <form action="{{ url_for('info') }}" method="POST">
+        <h3>Select Clothes Type:</h3>
+        {% for cloth in clothes_types %}
+            <input type="checkbox" name="clothes" value="{{ cloth }}"{% if cloth in selected_clothes %} checked{% endif %}> {{ cloth }}<br>
+        {% endfor %}
+        <br>
+        
+        <h3>Select State:</h3>
+        <select name="state">
+            <option value="">Select a State</option>
+            {% for state in states %}
+                <option value="{{ state }}" {% if state == selected_state %} selected {% endif %}>{{ state }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <button type="submit">Display</button>
+    </form>
+
+    <h2>Matching Donor Information</h2>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Number</th>
+                <th>State</th>
+                <th>Area</th>
+                <th>Location</th>
+                <th>Clothes</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for donor in donors %}
+                <tr>
+                    <td>{{ donor.id }}</td>
+                    <td>{{ donor.name }}</td>
+                    <td>{{ donor.num }}</td>
+                    <td>{{ donor.state }}</td>
+                    <td>{{ donor.area }}</td>
+                    <td>
+                        <a href="https://www.google.com/maps?q={{ donor.location }}" target="_blank">
+                            {{ donor.location }}
+                        </a>
+                    </td>
+                    <td>{{ donor.clothes }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br>
+    <a href="{{ url_for('logout') }}">Logout</a>
+</body>
+</html>
