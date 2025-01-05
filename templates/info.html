@@ -4,10 +4,116 @@
     <meta charset="UTF-8">
     <title>Donor Information</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2, h3 {
+            color: #333;
+        }
+
+        .alerts {
+            margin-bottom: 20px;
+        }
+
+        .alert {
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .alert-danger {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        form h3 {
+            margin-top: 0;
+        }
+
+        form input[type="checkbox"] {
+            margin-right: 10px;
+        }
+
+        form select, form button {
+            padding: 10px;
+            margin-top: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .donor-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .donor-card h3 {
+            margin-top: 0;
+            color: #4CAF50;
+        }
+
+        .donor-card p {
+            margin: 5px 0;
+        }
+
+        .donor-card a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .donor-card a:hover {
+            text-decoration: underline;
+        }
+
+        .logout-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .logout-link:hover {
+            text-decoration: underline;
+        }
+    </style>
 </head>
 <body>
+             
     <h1>Donor Information</h1>
 
+    <!-- Flash Messages -->
     {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
             <div class="alerts">
@@ -18,13 +124,17 @@
         {% endif %}
     {% endwith %}
 
+    <!-- Filter Form -->
     <form action="{{ url_for('info') }}" method="POST">
         <h3>Select Clothes Type:</h3>
         {% for cloth in clothes_types %}
-            <input type="checkbox" name="clothes" value="{{ cloth }}"{% if cloth in selected_clothes %} checked{% endif %}> {{ cloth }}<br>
+            <label>
+                <input type="checkbox" name="clothes" value="{{ cloth }}" {% if cloth in selected_clothes %} checked {% endif %}>
+                {{ cloth }}
+            </label><br>
         {% endfor %}
         <br>
-        
+
         <h3>Select State:</h3>
         <select name="state">
             <option value="">Select a State</option>
@@ -32,43 +142,28 @@
                 <option value="{{ state }}" {% if state == selected_state %} selected {% endif %}>{{ state }}</option>
             {% endfor %}
         </select>
-        <br>
+        <br><br>
         <button type="submit">Display</button>
     </form>
 
+    <!-- Donor Information -->
     <h2>Matching Donor Information</h2>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Number</th>
-                <th>State</th>
-                <th>Area</th>
-                <th>Location</th>
-                <th>Clothes</th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for donor in donors %}
-                <tr>
-                    <td>{{ donor.id }}</td>
-                    <td>{{ donor.name }}</td>
-                    <td>{{ donor.num }}</td>
-                    <td>{{ donor.state }}</td>
-                    <td>{{ donor.area }}</td>
-                    <td>
-                        <a href="https://www.google.com/maps?q={{ donor.location }}" target="_blank">
-                            {{ donor.location }}
-                        </a>
-                    </td>
-                    <td>{{ donor.clothes }}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+    {% for donor in donors %}
+        <div class="donor-card">
+            <h3>{{ donor.name }}</h3>
+            <p><strong>Phone Number:</strong> {{ donor.num }}</p>
+            <p><strong>State:</strong> {{ donor.state }}</p>
+            <p><strong>Area:</strong> {{ donor.area }}</p>
+            <p><strong>Location:</strong> <a href="https://www.google.com/maps?q={{ donor.location }}" target="_blank">Click me for location</a></p>
+            <p><strong>Clothes Type:</strong> {{ donor.clothes }}</p>
+        </div>
+    {% else %}
+        <p>No donors found matching your criteria.</p>
+    {% endfor %}
 
-    <br>
-    <a href="{{ url_for('logout') }}">Logout</a>
+    <!-- Logout Link -->
+    <a href="{{ url_for('logout') }}" class="logout-link">Logout</a>
+    <!-- Back to Home Link -->
+<a href="{{ url_for('home') }}" class="home-link">Back to Home</a>
 </body>
 </html>

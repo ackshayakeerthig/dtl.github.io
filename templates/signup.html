@@ -12,18 +12,42 @@
         <form action="{{ url_for('signup') }}" method="POST" class="signup-form">
             {{ form.hidden_tag() }}
 
+            <!-- Username Field -->
+            <label for="username">Username:</label>
+            {{ form.username(class='form-control', id='username', placeholder='Enter your username') }}
+            <br>
+
+            <!-- Email Field -->
             <label for="email">Email:</label>
             {{ form.email(class='form-control', id='email', placeholder='Enter your email') }}
             <br>
 
+            <!-- Password Field -->
             <label for="password">Password:</label>
             {{ form.password(class='form-control', id='password', placeholder='Enter your password') }}
             <br>
 
+            <!-- Confirm Password Field -->
             <label for="confirm_password">Confirm Password:</label>
             {{ form.confirm_password(class='form-control', id='confirm_password', placeholder='Confirm your password') }}
             <br>
 
+            <!-- Category Field -->
+            <label for="category">Category:</label>
+            <select name="category" id="category" class="form-control" required>
+                <option value="" disabled selected>Select your category</option>
+                <option value="individual">Individual</option>
+                <option value="orphanage">Orphanage</option>
+                <option value="fashiondesigner">Fashion Designer</option>
+            </select>
+            <br>
+
+            <!-- Phone Number Field -->
+            <label for="phone_number">Phone Number:</label>
+            {{ form.phone_number(class='form-control', id='phone_number', placeholder='Enter your phone number') }}
+            <br>
+
+            <!-- Submit Button -->
             <button type="submit" class="btn">Signup</button>
         </form>
         <p class="signin-link">Already have an account? <a href="{{ url_for('login') }}">Login</a></p>

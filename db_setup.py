@@ -9,8 +9,11 @@ def initialize_db():
     cursor.execute('''
     CREATE TABLE IF NOT EXISTS users (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT UNIQUE NOT NULL,
-        password TEXT NOT NULL
+        username TEXT NOT NULL,
+        password TEXT NOT NULL,
+        category TEXT NOT NULL CHECK(category IN ('individual', 'orphanage', 'fashiondesigner')),
+        emailid TEXT UNIQUE NOT NULL,
+        phone_number TEXT
     )
     ''')
     conn.commit()
